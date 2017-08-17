@@ -1,6 +1,6 @@
 # Laravel SB Admin
 
-##Setup
+## Setup
 
 #### Instalation
 1. Clone this repository
@@ -18,7 +18,7 @@
 #### SB Admin Templates
 visit /public/sbadmin
 
-##Artisan Helper
+## Artisan Helper
 
 ## Deployment & Maintenance
 
