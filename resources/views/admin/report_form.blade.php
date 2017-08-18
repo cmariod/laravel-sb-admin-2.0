@@ -13,9 +13,32 @@
 
 {!! Form::open(['url' => Request::url()]) !!}
 
+<div class="form-group @if ($errors->has('id')) has-error @endif">
+{!! Form::label('id', 'Report Type', ['class' => 'control-label']) !!}
+{!! Form::select('id', $reportTypes, null, ['placeholder' => 'Pick a report...', 'class' => 'form-control']); !!}
+@isset($errors) 
+  @if ($errors->has('id'))
+  <p class="help-block">{{ $errors->first('id') }}</p>
+  @endif
+@endisset
+</div>
+
+<div class="form-group @if ($errors->has('daterange')) has-error @endif">
+{!! Form::label('daterange', 'Date Range', ['class' => 'control-label']) !!}
+{!! Form::text('daterange', '', ['class' => 'form-control']); !!}
+@isset($errors) 
+  @if ($errors->has('daterange'))
+  <p class="help-block">{{ $errors->first('daterange') }}</p>
+  @endif
+@endisset
+</div>
+
 <div class="form-group @if ($errors->has('type')) has-error @endif">
-{!! Form::label('type', 'Report Type', ['class' => 'control-label']) !!}
-{!! Form::select('type', $reportTypes, null, ['placeholder' => 'Pick a report...', 'class' => 'form-control']); !!}
+{!! Form::label('type', 'Type', ['class' => 'control-label']) !!}
+<br />
+{!! Form::radio('type', 'xlsx', true); !!} Download Excel
+{!! Form::radio('type', 'csv'); !!} Download CSV
+{!! Form::radio('type', 'preview'); !!} Preview
 @isset($errors) 
   @if ($errors->has('type'))
   <p class="help-block">{{ $errors->first('type') }}</p>
@@ -23,29 +46,20 @@
 @endisset
 </div>
 
-<div class="form-group @if ($errors->has('fromdate')) has-error @endif">
-{!! Form::label('fromdate', 'From Date', ['class' => 'control-label']) !!}
-{!! Form::date('fromdate', \Carbon\Carbon::now(), ['class' => 'form-control']); !!}
-@isset($errors) 
-  @if ($errors->has('fromdate'))
-  <p class="help-block">{{ $errors->first('fromdate') }}</p>
-  @endif
-@endisset
-</div>
-
-<div class="form-group @if ($errors->has('todate')) has-error @endif">
-{!! Form::label('todate', 'To Date', ['class' => 'control-label']) !!}
-{!! Form::date('todate', \Carbon\Carbon::now(), ['class' => 'form-control']); !!}
-@isset($errors) 
-  @if ($errors->has('todate'))
-  <p class="help-block">{{ $errors->first('todate') }}</p>
-  @endif
-@endisset
-</div>
-
-{!! Form::submit('Download Report', ['class' => 'btn btn-sm btn-primary']); !!}
+{!! Form::submit('Submit', ['class' => 'btn btn-sm btn-primary']); !!}
 
 {!! Form::close() !!}
+
+@isset($report)
+<br />
+<br />
+@component('admin.widget.table', [
+    'action' => false,
+    'headers' => count($report) > 0 ? array_keys($report[0]) : [' '],
+    'data' => $report,
+  ])
+@endcomponent
+@endisset
 
 </div>
 

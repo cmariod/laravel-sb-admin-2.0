@@ -6,7 +6,7 @@
     @empty
       <td></td>
     @endforelse
-    @if (count($headers) > 0)
+    @if (count($headers) > 0 && $action)
       <td>Actions</td>
     @endif
     </tr>
@@ -17,10 +17,12 @@
     @foreach ($row as $value)
       <td>{{ $value }}</td>
     @endforeach
+    @if ($action)
       <td>
         <a href="{{ route($base_route . '/edit', $row['id']) }}" class="btn btn-xs btn-default btn-outline">Edit</a>
         <a href="{{ route($base_route . '/delete', $row['id']) }}" class="btn btn-xs btn-danger">Delete</a>
       </td>
+    @endif
     </tr>
   @empty
     <tr><td>Data not found</td></tr>
@@ -28,4 +30,6 @@
   </tbody>
 </table>
 
+@if ($action)
 <a href="{{ route($base_route . '/new') }}" class="btn btn-sm btn-primary">New</a>
+@endif

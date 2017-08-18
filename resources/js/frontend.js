@@ -82,3 +82,30 @@ if (cbar !== null) {
         }
     });
 }
+
+$(document).ready(function() {
+  
+  $('input[name="daterange"]').daterangepicker({
+      "showDropdowns": true,
+      "autoApply": true,
+      locale: {
+        format: 'YYYY-MM-DD'
+      },
+      "ranges": {
+          Today: [moment(), moment()],
+          Yesterday: [moment().subtract("days", 1), moment().subtract("days", 1)],
+          "Last 7 Days": [moment().subtract("days", 6), moment()],
+          "Last 30 Days": [moment().subtract("days", 29), moment()],
+          "This Month": [moment().startOf("month"), moment().endOf("month")],
+          "Last Month": [moment().subtract("month", 1).startOf("month"), moment().subtract("month", 1).endOf("month")]
+      },
+      "startDate": moment().subtract("month", 1).startOf("month"),
+      "endDate": moment().subtract("month", 1).endOf("month"),
+      "minDate": "2017/05/04",
+      "maxDate": "2017/12/31",
+      "opens": "center"
+  }, function(start, end, label) {
+    // console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+  });
+  
+});

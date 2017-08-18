@@ -10,6 +10,7 @@
 @endif
 
 @component('admin.widget.table', [
+    'action' => true,
     'headers' => array_keys($users[0]),
     'data' => $users,
     'base_route' => 'user'

@@ -20,6 +20,8 @@ mix.scripts([
    'bower_components/bootstrap/dist/js/bootstrap.js',
    'bower_components/Chart.js/dist/Chart.js',
    'bower_components/metisMenu/dist/metisMenu.js',
+   'bower_components/moment/moment.js',
+   'bower_components/bootstrap-daterangepicker/daterangepicker.js',
    'resources/js/sb-admin-2.js',
    'resources/js/frontend.js'
 ], 'public/assets/scripts/frontend.js')
@@ -29,6 +31,7 @@ mix.scripts([
 mix.styles([
    'bower_components/bootstrap/dist/css/bootstrap.css',
    'bower_components/fontawesome/css/font-awesome.css',
+   'bower_components/bootstrap-daterangepicker/daterangepicker.css',
    'resources/css/sb-admin-2.css',
    'resources/css/timeline.css',
    'resources/css/frontend.css'
