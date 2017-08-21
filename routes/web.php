@@ -74,16 +74,8 @@ Route::group(['prefix' => 'api'], function () {
   // test env (non-prod) only api
   
   Route::group(['middleware' => ['api.auth']], function () { // all below need static auth token
-    
-    Route::match(['post'], 'customer', 'CustomerController@index');
-    Route::match(['post'], 'customer/chancecodes', 'CustomerController@getChanceCodes');
-    Route::match(['post'], 'gamecode', 'GameCodeController@index');
-    Route::match(['post'], 'submit', 'GameCodeController@submit')->middleware('api.countrylookup');
-    Route::match(['post'], 'freetoplay', 'FreeToPlayController@submit');
-    Route::match(['post'], 'voucher', 'VoucherController@submit');
-    
+        
     // kiosk related exclusive api
-    Route::match(['post'], 'uploadreceipt', 'SyncController@index');
     
   });
   
