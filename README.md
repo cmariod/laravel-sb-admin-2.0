@@ -12,8 +12,7 @@
 7. setup database schema by executing `php artisan migrate` & `php artisan db:seed` or `php artisan migrate:refresh --seed` to completely re-build database
 
 #### Cron Setup
-1. Create sync/temp & sync/archive folder if .env['APP_BUILD'] is master. Make sure folder is writable by apache user.
-2. Setup crontab and add in lines to `* * * * * php /var/www/cagxmas/artisan schedule:run >> /dev/null 2>&1`
+1. Setup crontab and add in lines to `* * * * * php /{path_to_project}/artisan schedule:run >> /dev/null 2>&1`
 
 #### SB Admin Templates
 visit /public/sbadmin
