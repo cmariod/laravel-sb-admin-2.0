@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         
-        $this->middleware('adminauth'); // TODO: create admin middleware, to validate if current logged in user are admin level
+        $this->middleware('adminauth');
     }
 
     /**
