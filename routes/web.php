@@ -70,18 +70,8 @@ Route::group(['prefix' => 'api'], function () {
   
   Route::get('/', 'HealthCheckController@index');
   Route::get('/healthcheck', 'HealthCheckController@extensive');
-  
-  Route::match(['get'], 'country', 'CountryController@index');
-  
-  // put any api prefixed get routing above this line, because below will be consumed by the wildcard json handler
-  
-  Route::match(['get'], '{jsonName}', 'JSONController@index')
-  ->where([
-    'jsonName' => '[A-Za-z0-9]+'
-  ]);
     
   // test env (non-prod) only api
-  Route::match(['post'], 'clearreceipt', 'TestEnvController@clearReceipt');
   
   Route::group(['middleware' => ['api.auth']], function () { // all below need static auth token
     
