@@ -11,7 +11,6 @@
 
 @component('admin.widget.table', [
     'action' => true,
-    'headers' => count($users) > 0 ? array_keys($users[0]) : ['&nbsp;'],
     'data' => $users,
     'base_route' => 'user'
   ])

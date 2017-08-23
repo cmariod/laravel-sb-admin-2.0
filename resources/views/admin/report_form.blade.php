@@ -54,10 +54,9 @@
 <br />
 <br />
 @component('admin.widget.table', [
-    'action' => false,
-    'headers' => count($report) > 0 ? array_keys($report[0]) : ['&nbsp;'],
-    'data' => $report,
-  ])
+  'action' => false,
+  'data' => $report,
+])
 @endcomponent
 @endisset
 

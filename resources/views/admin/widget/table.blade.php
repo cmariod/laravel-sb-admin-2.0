@@ -1,11 +1,15 @@
 <table class="table table-condensed table-bordered table-hover">
   <thead>
     <tr>
-    @forelse ($headers as $header)
-      <td>{{ ucwords(str_replace(['_', '-'], ' ', $header)) }}</td>
-    @empty
-      <td></td>
-    @endforelse
+    @if (count($data) > 0)
+      @foreach ($data[0] as $key=>$value)
+        @if (is_scalar($value))
+          <td>{{ ucwords(str_replace(['_', '-'], ' ', $key)) }}</td>
+        @endif
+      @endforeach
+    @else
+      <td>&nbsp;</td>
+    @endif
     @if (count($data) > 0 && $action)
       <td>Actions</td>
     @endif
@@ -15,7 +19,9 @@
   @forelse ($data as $row)
     <tr>
     @foreach ($row as $value)
-      <td>{{ $value }}</td>
+      @if (is_scalar($value))
+        <td>{{ $value }}</td>
+      @endif
     @endforeach
     @if ($action)
       <td>
