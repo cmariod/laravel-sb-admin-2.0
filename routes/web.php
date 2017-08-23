@@ -32,8 +32,8 @@ Route::group(['middleware' => ['csrf']], function () {
   Route::group(['prefix' => env('APP_ADMIN_PATH'), 'middleware' => ['auth']], function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin');
     
-    // User management routing
-    Route::get('/user', 'Admin\UserController@index')->name('user');
+    // user management routing
+    Route::get('/user', 'Admin\UserController@adminIndex')->name('user');
     Route::get('/user/new', 'Admin\UserController@showNewForm')->name('user/new');
     Route::post('/user/new', 'Admin\UserController@create');
     Route::get('/user/edit/{id}', 'Admin\UserController@showEditForm')->name('user/edit')->where([
@@ -74,7 +74,9 @@ Route::group(['prefix' => 'api'], function () {
   // test env (non-prod) only api
   
   Route::group(['middleware' => ['api.auth']], function () { // all below need static auth token
-        
+    
+    Route::match(['post'], 'customer', 'CustomerController@index');
+    
     // kiosk related exclusive api
     
   });

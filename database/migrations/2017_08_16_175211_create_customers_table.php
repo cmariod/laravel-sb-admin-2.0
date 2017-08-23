@@ -18,9 +18,10 @@ class CreateCustomersTable extends Migration
           $table->binary('govid');
           $table->binary('name');
           $table->timestamps();
+          $table->softDeletes();
       });
       
-      DB::unprepared('CREATE OR REPLACE ALGORITHM = MERGE SQL SECURITY INVOKER  VIEW `customers` AS SELECT `id`, tm_decrypt(`govid`) AS govid, tm_decrypt(`name`) AS name, `created_at`, `updated_at` FROM `customers_encrypted`');
+      DB::unprepared('CREATE OR REPLACE ALGORITHM = MERGE SQL SECURITY INVOKER  VIEW `customers` AS SELECT `id`, tm_decrypt(`govid`) AS govid, tm_decrypt(`name`) AS name, `created_at`, `updated_at` FROM `customers_encrypted` WHERE `deleted_at` IS NULL');
     }
 
     /**

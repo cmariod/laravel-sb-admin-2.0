@@ -8,10 +8,10 @@ use DB;
 use Validator;
 use Session;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 
 class UserController extends Controller
 {
-    private $tableName = 'users';
     private $baseRouteName = 'user';
     
     /**
@@ -31,9 +31,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function adminIndex()
     {
-      $users = DB::table($this->tableName)->select('id', 'name', 'email')->get();
+      $users = User::all();
+      
       return view('admin.user_list', ['users' => json_decode(json_encode($users), true)]);
     }
     
@@ -70,12 +71,12 @@ class UserController extends Controller
         return back()->withInput()->withErrors($validator);
       }
       
-      DB::table($this->tableName)->insert([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'password' => bcrypt($request->input('password')),
-        'level' => $request->input('level'),
-      ]);
+      $user = new User;
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = bcrypt($request->password);
+      $user->level = $request->level;
+      $user->save();
       
       return redirect()->route($this->baseRouteName)->with('message', 'User Created');
     }
@@ -87,7 +88,7 @@ class UserController extends Controller
      */
     public function showEditForm($id)
     {
-      $result = DB::table($this->tableName)->where('id', '=', $id)->get();
+      $result = User::find($id);
       
       return view('admin.user_edit_form', json_decode(json_encode($result[0]), true));
     }
@@ -115,17 +116,14 @@ class UserController extends Controller
         return back()->withInput()->withErrors($validator);
       }
       
-      $updateFields = [
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'level' => $request->input('level'),
-      ];
-      
-      if (!empty($request->input('password'))) {
-        $updateFields['password'] = bcrypt($request->input('password'));
+      $user = User::find($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->level = $request->level;
+      if (!empty($request->password)) {
+        $user->password = bcrypt($request->password);
       }
-      
-      DB::table($this->tableName)->where('id', '=', $id)->update($updateFields);
+      $user->save();
       
       return redirect()->route($this->baseRouteName)->with('message', 'User Updated');
     }
@@ -137,7 +135,7 @@ class UserController extends Controller
      */
     public function delete($id)
     {
-      DB::table($this->tableName)->where('id', '=', $id)->delete();
+      User::destroy($id);
       
       return redirect()->route($this->baseRouteName)->with('message', 'User Deleted');
     }

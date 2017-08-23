@@ -2,11 +2,11 @@
   <thead>
     <tr>
     @forelse ($headers as $header)
-      <td>{{ ucwords($header) }}</td>
+      <td>{{ ucwords(str_replace(['_', '-'], ' ', $header)) }}</td>
     @empty
       <td></td>
     @endforelse
-    @if (count($headers) > 0 && $action)
+    @if (count($data) > 0 && $action)
       <td>Actions</td>
     @endif
     </tr>

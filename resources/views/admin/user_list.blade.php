@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('page_heading','Manage User')
+@section('page_heading','Manage Users')
 @section('section')
 
 @if (Session::has('message'))
@@ -11,7 +11,7 @@
 
 @component('admin.widget.table', [
     'action' => true,
-    'headers' => array_keys($users[0]),
+    'headers' => count($users) > 0 ? array_keys($users[0]) : ['&nbsp;'],
     'data' => $users,
     'base_route' => 'user'
   ])
