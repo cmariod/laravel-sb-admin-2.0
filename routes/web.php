@@ -73,11 +73,7 @@ Route::group(['prefix' => 'api'], function () {
     
   // test env (non-prod) only api
   
-  Route::group(['middleware' => ['api.auth']], function () { // all below need static auth token
-    
-    Route::match(['post'], 'customer', 'CustomerController@index');
-    
-    // kiosk related exclusive api
+  Route::group(['middleware' => ['api.auth']], function () { // everything inside needs static auth token
     
   });
   
