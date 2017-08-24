@@ -35,7 +35,7 @@ class UserController extends Controller
     {
       $users = User::all();
       
-      return view('admin.user_list', ['users' => json_decode(json_encode($users), true)]);
+      return view('admin.user_list', ['users' => $users->toArray()]);
     }
     
     /**
@@ -90,7 +90,7 @@ class UserController extends Controller
     {
       $result = User::find($id);
       
-      return view('admin.user_edit_form', json_decode(json_encode($result[0]), true));
+      return view('admin.user_edit_form', $result->toArray());
     }
     
     /**
