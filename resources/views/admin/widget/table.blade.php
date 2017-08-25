@@ -36,6 +36,6 @@
   </tbody>
 </table>
 
-@if ($action)
+@if ($new)
 <a href="{{ route($base_route . '/new') }}" class="btn btn-sm btn-primary">New</a>
 @endif
