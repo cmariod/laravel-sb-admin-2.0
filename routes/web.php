@@ -29,7 +29,7 @@ Route::group(['middleware' => ['csrf']], function () {
   // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
   // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-  Route::group(['prefix' => env('APP_ADMIN_PATH'), 'middleware' => ['auth']], function () {
+  Route::group(['prefix' => env('APP_ADMIN_PATH'), 'middleware' => ['auth', 'beforepost', 'afterpost']], function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin');
     
     // user management routing
