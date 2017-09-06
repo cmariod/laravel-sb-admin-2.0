@@ -19,7 +19,15 @@
   @forelse ($data as $row)
     <tr>
     @foreach ($row as $value)
-      @if (is_scalar($value))
+      @if (is_bool($value))
+        <td>
+          @if ($value)
+          <i class="fa fa-lg fa-check text-success"></i>
+          @else
+          <i class="fa fa-lg fa-times text-danger"></i>
+          @endif
+        </td>
+      @elseif (is_scalar($value))
         <td>{{ $value }}</td>
       @endif
     @endforeach
